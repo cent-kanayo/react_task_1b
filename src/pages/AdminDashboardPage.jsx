@@ -7,6 +7,7 @@ import { GlobalContext, showToast } from '../globalContext';
 import MkdSDK from '../utils/MkdSDK';
 
 import Photo from '../images/photo.jpg';
+import arrow from '../images/arrow.png';
 
 const AdminDashboardPage = () => {
   const { dispatch } = useContext(AuthContext);
@@ -83,9 +84,9 @@ const AdminDashboardPage = () => {
             <p className="text-white opacity-75">11:34</p>
           </div>
         </section>
-        <section className="px-[112px]">
-          <div className="mb-4 overflow-x-auto">
-            <div className="flex max-w-[1216px] mx-auto px-4">
+        <section>
+          <div>
+            <div className="flex max-w-[1216px] items-center mx-auto px-4 text-white opacity-75 mb-3">
               <span className="w-[5%]">#</span>
               <span className="w-[60%]">Title</span>
               <span className="w-[10%]">Author</span>
@@ -97,7 +98,7 @@ const AdminDashboardPage = () => {
                 return (
                   <div
                     key={video.id}
-                    className="video flex mx-auto mb-4 items-center px-4"
+                    className="video flex mx-auto mb-4 items-center px-4 gap-4 text-white opacity-75"
                   >
                     <span className="w-[5%]">{video.user_id}</span>
                     <span className="w-[10%]">
@@ -109,18 +110,21 @@ const AdminDashboardPage = () => {
                     </span>
 
                     <span className="w-[50%]">{video.title}</span>
-                    <span className="text-[#DBFD51] w-[10%]">
+                    <span className="text-[#DBFD51] w-[15%]">
                       {video.username}
                     </span>
-                    <span className="w-[10%] justify-self-start">
-                      {video.like}
+                    <span className="w-[10%] flex items-center space-x-3">
+                      <span>{video.like}</span>
+                      <span>
+                        <img src={arrow} alt="" />
+                      </span>
                     </span>
                   </div>
                 );
               })}
             </div>
           </div>
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex justify-between items-center mb-8  max-w-[1216px] mx-auto">
             <button
               onClick={() => handleClick('prev')}
               className="text-white  bg-[#9bff00] px-8 py-2 rounded-lg"

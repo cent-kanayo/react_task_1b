@@ -30,13 +30,14 @@ const reducer = (state, action) => {
       const role = action.payload.role;
       const token = action.payload.token;
       localStorage.setItem('role', JSON.stringify(role));
-      localStorage.setItem('token', JSON.stringify(token));
+      localStorage.setItem('token', token);
       localStorage.setItem('Auth', JSON.stringify(true));
       return {
         ...state,
         user: action.payload,
         isAuthenticated: true,
         role: role,
+        token: token,
       };
     case 'LOGOUT':
       localStorage.clear();
@@ -69,8 +70,7 @@ const AuthProvider = ({ children }) => {
     //TODO
     const validateToken = async () => {
       const role = localStorage.getItem('role');
-      const isValidMessage = await sdk.check(JSON.parse(role));
-      // tokenExpireError(dispatch, isValidMessage);
+      const isValidMessage = await sdk.check(role);
     };
     validateToken();
   }, []);

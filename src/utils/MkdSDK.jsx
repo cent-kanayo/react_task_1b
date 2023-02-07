@@ -104,18 +104,17 @@ export default function MkdSDK() {
 
   this.check = async function (role) {
     //TODO
-    try {
-      const response = await fetch(`${this._baseurl}/v2/api/lambda/check`, {
-        method: 'post',
-        headers: this.getHeader(),
-        body: JSON.stringify({ role: role }),
-      });
-      const result = await response.json();
-      console.log(result);
-      return result.message;
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const response = await fetch(`${this._baseurl}/v2/api/lambda/check`, {
+    //     method: 'post',
+    //     headers: this.getHeader(),
+    //     body: JSON.stringify({ role: role }),
+    //   });
+    //   const result = await response.json();
+    //   return result.message;
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return this;

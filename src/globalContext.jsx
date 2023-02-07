@@ -62,7 +62,7 @@ const GlobalProvider = ({ children }) => {
   useEffect(() => {
     const fetchVideos = async () => {
       let sdk = new MkdSDK();
-      sdk.setTable('videos');
+      sdk.setTable('video');
       const videos = await sdk.callRestAPI({}, 'PAGINATE');
       console.log(videos);
       dispatch({ type: 'GET-VIDEOS', payload: videos });

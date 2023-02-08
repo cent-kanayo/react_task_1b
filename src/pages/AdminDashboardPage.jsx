@@ -49,7 +49,11 @@ const AdminDashboardPage = () => {
         setPage(page - 1);
       }
     } else if (value === 'next') {
-      setPage(page + 1);
+      if (page >= videos['num_pages']) {
+        setPage(videos['num_pages']);
+      } else {
+        setPage(page + 1);
+      }
     }
   };
 
@@ -92,8 +96,8 @@ const AdminDashboardPage = () => {
           <div>
             <div className="flex max-w-[1216px] items-center mx-auto px-4 text-white opacity-30 mb-3 relative">
               <span className="w-[4%]">#</span>
-              <span className="w-[48%]">Title</span>
-              <span className="w-[53%]">Author</span>
+              <span className="w-[46%]">Title</span>
+              <span className="w-[40%] ml-5">Author</span>
               <span className="w-[10%] invisible">hidden</span>
               <span className="flex items-center space-x-1 absolute right-4">
                 <span>Most Liked</span>

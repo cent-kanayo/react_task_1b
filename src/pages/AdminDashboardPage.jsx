@@ -6,14 +6,20 @@ import { AuthContext } from '../authContext';
 import { GlobalContext, showToast } from '../globalContext';
 import MkdSDK from '../utils/MkdSDK';
 
-import Photo from '../images/photo.jpg';
-import arrow from '../images/arrow.png';
+import drop from '../images/dropdown.png';
+
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
+import Table from '../components/Table';
 
 const AdminDashboardPage = () => {
   const { dispatch } = useContext(AuthContext);
   const { dispatch: global } = React.useContext(GlobalContext);
   const [videos, setVideos] = useState([]);
   const [page, setPage] = useState(1);
+
+  const [row, setRow] = useState([]);
 
   const navigate = useNavigate();
 
@@ -47,12 +53,10 @@ const AdminDashboardPage = () => {
     }
   };
 
-  console.log(videos);
-
   if (!videos?.list?.length) return <h1>Loading...</h1>;
   return (
-    <>
-      <div className="bg-[#111111] w-full ">
+    <DndProvider backend={HTML5Backend}>
+      <div className="bg-[#111111] w-full pt-3 ">
         <header className="px-6 flex justify-between items-center mb-[71px] max-w-[1216px] mx-auto">
           <h3 className="text-white font-extrabold text-[48px]">App</h3>
           <button
@@ -86,43 +90,23 @@ const AdminDashboardPage = () => {
         </section>
         <section>
           <div>
-            <div className="flex max-w-[1216px] items-center mx-auto px-4 text-white opacity-75 mb-3">
-              <span className="w-[5%]">#</span>
-              <span className="w-[60%]">Title</span>
-              <span className="w-[10%]">Author</span>
+            <div className="flex max-w-[1216px] items-center mx-auto px-4 text-white opacity-30 mb-3 relative">
+              <span className="w-[4%]">#</span>
+              <span className="w-[48%]">Title</span>
+              <span className="w-[53%]">Author</span>
               <span className="w-[10%] invisible">hidden</span>
-              <span className="w-[10%] justify-end">Most Liked</span>
+              <span className="flex items-center space-x-1 absolute right-4">
+                <span>Most Liked</span>
+                <span>
+                  <img
+                    src={drop}
+                    alt="drop down icon"
+                    className="opacity-100"
+                  />
+                </span>
+              </span>
             </div>
-            <div>
-              {videos?.list?.map((video) => {
-                return (
-                  <div
-                    key={video.id}
-                    className="video flex mx-auto mb-4 items-center px-4 gap-4 text-white opacity-75"
-                  >
-                    <span className="w-[5%]">{video.user_id}</span>
-                    <span className="w-[10%]">
-                      <img
-                        src={Photo}
-                        alt={video.username}
-                        className="w-[118px] h-[64px]"
-                      />
-                    </span>
-
-                    <span className="w-[50%]">{video.title}</span>
-                    <span className="text-[#DBFD51] w-[15%]">
-                      {video.username}
-                    </span>
-                    <span className="w-[10%] flex items-center space-x-3">
-                      <span>{video.like}</span>
-                      <span>
-                        <img src={arrow} alt="" />
-                      </span>
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+            <Table videos={videos} />
           </div>
           <div className="flex justify-between items-center mb-8  max-w-[1216px] mx-auto">
             <button
@@ -140,7 +124,7 @@ const AdminDashboardPage = () => {
           </div>
         </section>
       </div>
-    </>
+    </DndProvider>
   );
 };
 

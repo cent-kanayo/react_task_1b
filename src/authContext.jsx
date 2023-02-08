@@ -68,6 +68,7 @@ const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     //TODO
+    localStorage.clear();
     const validateToken = async () => {
       const role = localStorage.getItem('role');
       const isValidMessage = await sdk.check(role);

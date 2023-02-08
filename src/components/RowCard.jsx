@@ -5,10 +5,7 @@ import Photo from '../images/photo.jpg';
 import user from '../images/user.png';
 import arrow from '../images/arrow.png';
 
-const RowCard = ({ video, index, row, onDropRow }) => {
-  const dropRef = React.useRef(null);
-  const dragRef = React.useRef(null);
-
+const RowCard = ({ video }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'row',
     item: { id: video.id },
@@ -22,7 +19,6 @@ const RowCard = ({ video, index, row, onDropRow }) => {
       <div
         key={video.id}
         className="video flex mx-auto mb-4 items-center px-4 gap-4 text-white"
-        ref={dragRef}
       >
         <span className="w-4%] opacity-40">{video.user_id}</span>
         <span className="w-[10%]">

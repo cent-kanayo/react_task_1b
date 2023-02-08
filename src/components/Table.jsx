@@ -4,27 +4,22 @@ import { useDrop } from 'react-dnd';
 import RowCard from './RowCard';
 
 const Table = ({ videos }) => {
-  const [list, setList] = useState([]);
-  const [{ isOver }, drop] = useDrop(() => ({
+  const [list, setList] = useState(videos.list);
+  const [collectedProps, drop] = useDrop(() => ({
     accept: 'row',
-
-    drop: (item) => moveRow(item.id),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
+    drop: (item, monitor) => {
+      const result = monitor.isOver();
+      console.log(result);
+    },
   }));
-
-  const moveRow = (id) => {
-    console.log(id);
-  };
 
   return (
     <div
       ref={drop}
       className="relative max-w-[1216px] mx-auto overflow-x-auto lg:overflow-visible"
     >
-      {videos?.list?.map((video) => {
-        return <RowCard video={video} key={video.id} />;
+      {videos.list.map((video, index) => {
+        return <RowCard video={video} key={video.id} index={index} />;
       })}
     </div>
   );
